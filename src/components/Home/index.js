@@ -5,7 +5,7 @@ import { FirebaseContext } from '../Firebase'
 const Home = () => (
   <FirebaseContext.Consumer>
     {firebase => {
-      console.log(firebase)
+      firebase.doCreateUserWithEmailAndPassword("mikasdfasdfsadfe@mike.com", "hhhhhh")
       return <div>This is Firebase and stuff</div>
     }}
   </FirebaseContext.Consumer>
