@@ -13,6 +13,8 @@ const config = {
 class Firebase {
   constructor() {
     app.initializeApp(config)
+    this.name = 'bill'
   }
 }
+
 export default Firebase
