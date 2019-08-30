@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 
 import { withFirebase } from '../Firebase'
+import * as ROUTES from '../../constants/routes'
 
-const SignUp = (props) => {
-  console.log(props)
+const SignUp = () => {
   return (
     <div>
       <h1>Signup</h1>
@@ -27,7 +27,9 @@ class SignUpFormBase extends Component {
     event.preventDefault()
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
-      .then(authUser => console.log(authUser))
+      .then(authUser => {
+        this.props.history.push(ROUTES.HOME)
+      })
       .catch(error => {
         this.setState({error})
       })
@@ -92,6 +94,6 @@ class SignUpFormBase extends Component {
   }
 }
 
-const SignUpForm = withFirebase(SignUpFormBase)
+const SignUpForm = withRouter(withFirebase(SignUpFormBase))
 
-export default withRouter(SignUp)
+export default SignUp
