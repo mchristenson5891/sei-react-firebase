@@ -4,11 +4,11 @@ import { withRouter } from 'react-router-dom'
 import { withFirebase } from '../Firebase'
 import * as ROUTES from '../../constants/routes'
 
-const SignUp = () => {
+const SignUp = (props) => {
   return (
     <div>
       <h1>Signup</h1>
-        <SignUpForm />
+        <SignUpForm setUserId={props.setUserId}/>
     </div>
   )
 }
@@ -23,11 +23,20 @@ class SignUpFormBase extends Component {
   }
 
   onSubmit = event => {
-    const { email, passwordOne } = this.state
+    const { username, email, passwordOne } = this.state
     event.preventDefault()
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
+        this.props.setUserId(authUser.user.uid)
+        return this.props.firebase
+          .user(authUser.user.uid)
+          .set({
+            username,
+            email
+          })
+      })
+      .then(() =>  {
         this.props.history.push(ROUTES.HOME)
       })
       .catch(error => {
