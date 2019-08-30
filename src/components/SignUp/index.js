@@ -1,13 +1,19 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 
-const SignUp = () => (
-  <div>
-    <h1>Signup</h1>
-    <SignUpForm />
-  </div>
-)
+import { withFirebase } from '../Firebase'
 
-class SignUpForm extends Component {
+const SignUp = (props) => {
+  console.log(props)
+  return (
+    <div>
+      <h1>Signup</h1>
+        <SignUpForm />
+    </div>
+  )
+}
+
+class SignUpFormBase extends Component {
   state = {
     username: '',
     email: '',
@@ -17,7 +23,14 @@ class SignUpForm extends Component {
   }
 
   onSubmit = event => {
-
+    const { email, passwordOne } = this.state
+    event.preventDefault()
+    this.props.firebase
+      .doCreateUserWithEmailAndPassword(email, passwordOne)
+      .then(authUser => console.log(authUser))
+      .catch(error => {
+        this.setState({error})
+      })
   }
 
   onChange = event => {
@@ -27,6 +40,7 @@ class SignUpForm extends Component {
   }
 
   render() {
+    console.log(this.state)
     const {
       username,
       email,
@@ -72,10 +86,12 @@ class SignUpForm extends Component {
           placeholder='Confirm Password'
         />
         <button type='submit' disabled={isInvalid}>Sign Up</button>
-
+        {error && error.message}
       </form>
     )
   }
 }
 
-export default SignUp
+const SignUpForm = withFirebase(SignUpFormBase)
+
+export default withRouter(SignUp)
