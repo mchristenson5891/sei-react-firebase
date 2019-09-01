@@ -28,7 +28,6 @@ class SignUpFormBase extends Component {
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
-        this.props.setUserId(authUser.user.uid)
         return this.props.firebase
           .user(authUser.user.uid)
           .set({
@@ -104,5 +103,7 @@ class SignUpFormBase extends Component {
 }
 
 const SignUpForm = withRouter(withFirebase(SignUpFormBase))
+
+
 
 export default SignUp

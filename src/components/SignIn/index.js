@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withRouter, NavLink } from 'react-router-dom'
 
 import { withFirebase } from '../Firebase'
 import * as ROUTES from '../../constants/routes'
@@ -7,6 +8,7 @@ const SignIn = () => (
   <div>
     <h1>SignIn</h1>
     <SignInForm />
+    <SignUpLink />
   </div>
 )
 
@@ -59,6 +61,12 @@ class SignInFormBase extends Component {
   }
 }
 
-const SignInForm = withFirebase(SignInFormBase)
+const SignInForm = withRouter(withFirebase(SignInFormBase))
+
+const SignUpLink = () => (
+  <p>
+    Don't have an account? <NavLink exact to={ROUTES.SIGN_UP}>Sign Up</NavLink>
+  </p>
+)
 
 export default SignIn
