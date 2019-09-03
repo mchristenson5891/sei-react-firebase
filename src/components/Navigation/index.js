@@ -6,11 +6,11 @@ import * as ROUTES from '../../constants/routes'
 
 const Navigation = ({ authUser }) => (
   <div>
-    {authUser ? <NavigationAuth /> : <NavigationNonAuth />}
+    {authUser ? <NavigationAuth authUser={authUser}/> : <NavigationNonAuth />}
   </div>
 )
 
-const NavigationAuth = () => (
+const NavigationAuth = ({ authUser }) => (
   <ul>
     <li>
       <NavLink exact to={ROUTES.LANDING}>Landing</NavLink>
@@ -22,7 +22,7 @@ const NavigationAuth = () => (
       <NavLink exact to={ROUTES.ACCOUNT}>Account</NavLink>
     </li>
     <li>
-      <SignOutButton />
+      {authUser.username} <SignOutButton />
     </li>
   </ul>
 )

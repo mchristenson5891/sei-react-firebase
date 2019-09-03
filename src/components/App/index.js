@@ -23,7 +23,8 @@ class App extends Component {
   componentDidMount() {
     this.props.firebase.auth.onAuthStateChanged(authUser => {
       authUser
-        ? this.setState({ authUser })
+        ? this.props.firebase.db.collection('users').doc(authUser.uid).collection('movies').get()
+            .then(snapShot => console.log(snapShot.docs[0].data()))
         : this.setState({ authUser: null })
     })
   }
