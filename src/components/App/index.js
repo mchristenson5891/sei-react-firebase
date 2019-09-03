@@ -23,8 +23,8 @@ class App extends Component {
   componentDidMount() {
     this.props.firebase.auth.onAuthStateChanged(authUser => {
       authUser
-        ? this.props.firebase.db.collection('users').doc(authUser.uid).collection('movies').get()
-            .then(snapShot => console.log(snapShot.docs[0].data()))
+        ? this.props.firebase.user(authUser.uid).get()
+            .then(snapShot => this.setState({ authUser: snapShot.data() }))
         : this.setState({ authUser: null })
     })
   }
@@ -39,7 +39,11 @@ class App extends Component {
           <Route exact path={ROUTES.SIGN_UP} render={() => <SignUpPage />} />
           <Route exact path={ROUTES.SIGN_IN} component={SignInPage} />
           <Route exact path={ROUTES.PASSWORD_FORGET} component={PasswordForgetPage} />
-          <Route exact path={ROUTES.HOME} render={() => <HomePage />} />
+          {
+            this.state.authUser
+             ? <Route exact path={ROUTES.HOME} render={() => <HomePage authUser={this.state.authUser}/>} />
+             : null
+          }
           <Route exact path={ROUTES.ACCOUNT} component={AccountPage} />
           <Route exact path={ROUTES.ADMIN} component={AdminPage} />
         </Switch>

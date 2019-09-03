@@ -35,9 +35,9 @@ class Firebase {
 
   // User
 
-  user = uid => this.db.ref(`users/${uid}`)
+  user = uid => this.db.collection('users').doc(uid)
 
-  users = () => this.db.ref('users')
+  users = () => this.db.collection('users')
 
 }
 
