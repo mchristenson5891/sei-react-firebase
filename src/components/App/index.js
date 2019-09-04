@@ -20,15 +20,18 @@ class App extends Component {
     authUser: null
   }
 
-  componentDidMount() {
-    this.props.firebase.auth.onAuthStateChanged(authUser => {
-      authUser.uid
-      ? this.props.firebase.user(authUser.uid).get()
-          .then(snapShot => this.setState({authUser: snapShot.data()}))
-        // ? this.props.firebase.collection('users').doc(authUser.uid).get()
-        //     .then(snapShot => this.setState({ authUser: snapShot.data() }))
-        : this.setState({ authUser: null })
-    })
+  async componentDidMount() {
+    const t = await fetch('http://localhost:5001/react-firestore-5a3c9/us-central1/app/api/v1/get-tacos')
+    const ty = await t.json()
+    console.log(ty)
+    // this.props.firebase.auth.onAuthStateChanged(authUser => {
+    //   authUser.uid
+    //   ? this.props.firebase.user(authUser.uid).get()
+    //       .then(snapShot => this.setState({authUser: snapShot.data()}))
+    //     // ? this.props.firebase.collection('users').doc(authUser.uid).get()
+    //     //     .then(snapShot => this.setState({ authUser: snapShot.data() }))
+    //     : this.setState({ authUser: null })
+    // })
   }
 
   render() {

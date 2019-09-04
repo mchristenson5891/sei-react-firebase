@@ -1,0 +1,29 @@
+[debug] [2019-09-04T23:32:05.624Z] ----------------------------------------------------------------------
+[debug] [2019-09-04T23:32:05.625Z] Command:       /Users/michaelchristenson/.nvm/versions/node/v12.1.0/bin/node /Users/michaelchristenson/.nvm/versions/node/v12.1.0/bin/firebase serve --only functions
+[debug] [2019-09-04T23:32:05.625Z] CLI Version:   7.2.2
+[debug] [2019-09-04T23:32:05.625Z] Platform:      darwin
+[debug] [2019-09-04T23:32:05.625Z] Node Version:  v12.1.0
+[debug] [2019-09-04T23:32:05.626Z] Time:          Wed Sep 04 2019 16:32:05 GMT-0700 (Pacific Daylight Time)
+[debug] [2019-09-04T23:32:05.626Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-09-04T23:32:05.637Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-09-04T23:32:05.637Z] > authorizing via signed-in user
+[debug] [2019-09-04T23:32:05.637Z] [iam] checking project react-firestore-5a3c9 for permissions ["firebase.projects.get"]
+[debug] [2019-09-04T23:32:05.639Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/react-firestore-5a3c9:testIamPermissions  
+
+[debug] [2019-09-04T23:32:06.551Z] <<< HTTP RESPONSE 200
+[debug] [2019-09-04T23:32:06.553Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/react-firestore-5a3c9  
+ 
+[debug] [2019-09-04T23:32:07.121Z] <<< HTTP RESPONSE 200
+[warn] ⚠  Your requested "node" version "8" doesn't match your global version "12"
+[debug] [2019-09-04T23:32:07.136Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/react-firestore-5a3c9/adminSdkConfig  
+ 
+[debug] [2019-09-04T23:32:07.597Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: Emulator started at http://localhost:5000
+[info] i  functions: Watching "/Users/michaelchristenson/Desktop/firebase-react/sei-react-firebase/functions" for Cloud Functions...
+[debug] [2019-09-04T23:32:08.068Z] [runtime-status] Functions runtime initialized. {"cwd":"/Users/michaelchristenson/Desktop/firebase-react/sei-react-firebase/functions","node_version":"12.1.0"}
+[debug] [2019-09-04T23:32:08.068Z] [runtime-status] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true} {}
+[debug] [2019-09-04T23:32:08.071Z] [runtime-status] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.4.0","resolution":"/Users/michaelchristenson/Desktop/firebase-react/sei-react-firebase/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2019-09-04T23:32:08.073Z] [runtime-status] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.2.0","resolution":"/Users/michaelchristenson/Desktop/firebase-react/sei-react-firebase/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2019-09-04T23:32:08.073Z] [runtime-status] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.2.0","resolution":"/Users/michaelchristenson/Desktop/firebase-react/sei-react-firebase/functions/node_modules/firebase-functions/lib/index.js"}
+[info] ✔  functions[app]: http function initialized (http://localhost:5000/react-firestore-5a3c9/us-central1/app).

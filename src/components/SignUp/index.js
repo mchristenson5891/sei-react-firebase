@@ -58,6 +58,7 @@ class SignUpFormBase extends Component {
       })
       .catch(error => {
         this.setState({error})
+        setTimeout(() => this.setState({error: null}),1000)
       })
   }
 
