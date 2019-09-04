@@ -19,19 +19,39 @@ class SignUpFormBase extends Component {
     email: '',
     passwordOne: '',
     passwordTwo: '',
-    error: null
+    error: null,
+    image: null
   }
 
   onSubmit = event => {
-    const { username, email, passwordOne } = this.state
     event.preventDefault()
+
+    const { 
+      username, 
+      email, 
+      passwordOne,
+      image 
+    } = this.state
+
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
-        return this.props.firebase.db.collection('users').doc(authUser.user.uid).set({
-          username,
-          email
-        })
+        if(image) {
+          this.props.firebase.storage.ref('profile').child(image.name).put(image)
+            .then(file => file.ref.getDownloadURL())
+            .then(url => this.props.firebase.db.collection('users').doc(authUser.user.uid)
+              .set({
+                username,
+                email,
+                image: url
+              }))
+        } else {
+          return this.props.firebase.db.collection('users').doc(authUser.user.uid).set({
+            username,
+            email
+          })
+        }
+
       })
       .then(() =>  {
         this.props.history.push(ROUTES.HOME)
@@ -42,9 +62,11 @@ class SignUpFormBase extends Component {
   }
 
   onChange = event => {
-    this.setState({
-      [event.target.name] : event.target.value 
-    })
+      this.setState({
+        [event.target.name] : event.target.name.includes('image') 
+          ? event.target.files[0] 
+          : event.target.value 
+      })
   }
 
   render() {
@@ -92,6 +114,12 @@ class SignUpFormBase extends Component {
           onChange={this.onChange}
           type='password'
           placeholder='Confirm Password'
+        />
+        <input 
+          type='file' 
+          name='image' 
+          accept='image/png, image/jpeg' 
+          onChange={this.onChange}
         />
         <button type='submit' disabled={isInvalid}>Sign Up</button>
         {error && error.message}

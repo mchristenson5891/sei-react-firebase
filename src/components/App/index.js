@@ -22,9 +22,11 @@ class App extends Component {
 
   componentDidMount() {
     this.props.firebase.auth.onAuthStateChanged(authUser => {
-      authUser
-        ? this.props.firebase.user(authUser.uid).get()
-            .then(snapShot => this.setState({ authUser: snapShot.data() }))
+      authUser.uid
+      ? this.props.firebase.user(authUser.uid).get()
+          .then(snapShot => this.setState({authUser: snapShot.data()}))
+        // ? this.props.firebase.collection('users').doc(authUser.uid).get()
+        //     .then(snapShot => this.setState({ authUser: snapShot.data() }))
         : this.setState({ authUser: null })
     })
   }

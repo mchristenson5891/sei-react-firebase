@@ -41,6 +41,7 @@ class Home extends Component {
     console.log(this.state)
     return (
       <div>
+        <img src={this.props.authUser.image} />
         <form onSubmit={this.getOneMovie}>
           <input name='search' type='text' onChange={this.onChange}/>
           <button type='submit'>submit</button>
